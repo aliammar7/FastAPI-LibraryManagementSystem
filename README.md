@@ -1,99 +1,97 @@
-# FastAPI - Library Management System
+# Library Management API
 
-This is a Library Management System based in FastAPI with the following features:
-- FastAPI
-- JWT Authentication
-- SQLAlchemy ORM
-- Alembic migrations (Extendable)
-- Clean architecture (services, repositories, schemas)
+This is a **Library Management API** built with [FastAPI](https://fastapi.tiangolo.com/). It provides endpoints for managing users, books, and authentication.
 
-## 📁 Project Structure
+## Features
 
+- **User Management**: Create, update, delete, and retrieve user details.
+- **Book Management**: Add, update, delete, and list books.
+- **Authentication**: Secure login with JWT-based authentication.
+- **Database Integration**: Uses PostgreSQL with SQLAlchemy ORM.
+
+---
+
+## Project Structure
+
+```
 app/
-│
-├── main.py
-│
-├── core/
-│   ├── config.py
-│   ├── database.py
-│   ├── security.py
-│
-├── models/
-│   ├── __init__.py
-│   ├── user.py
-│   ├── book.py
-│
-├── schemas/
-│   ├── __init__.py
-│   ├── user.py
-│   ├── book.py
-│   ├── auth.py
-│
-├── repositories/
-│   ├── __init__.py
-│   ├── user.py
-│   ├── book.py
-│
-├── services/
-│   ├── __init__.py
-│   ├── user.py
-│   ├── book.py
-│   ├── auth.py
-│
-├── api/
-│   ├── __init__.py
-│   ├── deps.py
-│   └── v1/
-│       ├── __init__.py
-│       ├── auth.py
-│       ├── users.py
-│       └── books.py
-│
-├── utils/
-│   └── hashing.py
-│
-└── alembic/
+├── api/                # API routes
+├── core/               # Core configurations and database setup
+├── models/             # SQLAlchemy models
+├── repositories/       # Database interaction logic
+├── schemas/            # Pydantic schemas
+├── services/           # Business logic
+├── utils/              # Utility functions
+├── main.py             # Application entry point
+```
 
+---
 
-# How to run
-## Install Postgres on Mac
+## Requirements
 
-brew install postgresql
-brew services start postgresql
+- Python 3.11+
+- PostgreSQL database
 
-Check Installation
-psql --version
+---
 
-## Set up Postgres Database
-psql postgres
+## Installation
 
-### Create database and User
--- Create a user
-CREATE USER library_user WITH PASSWORD 'library_pass';
+1. Clone the repository:
 
--- Create a database
-CREATE DATABASE library_db OWNER library_user;
+   ```bash
+   git clone https://github.com/your-username/library-management-api.git
+   cd library-management-api
+   ```
 
--- Optional: allow password login
-ALTER USER library_user WITH SUPERUSER;
+2. Create and activate a virtual environment:
 
-## Set Up Virtual Enviornment
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-python3 -m venv venv
-source venv/bin/activate
-pip install --upgrade pip
+3. Install dependencies:
 
-## Install required Python packages
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-pip install fastapi[all] sqlalchemy psycopg2-binary pydantic-settings passlib[bcrypt] python-jose[cryptography]
-pip install alembic
+4. Set up the `.env` file:
 
-## Run the FastAPI app
+   Create a `.env` file in the root directory with the following variables:
 
-python -m uvicorn app.main:app --reload
-INFO:     Uvicorn running on http://127.0.0.1:8000
+   ```env
+   DATABASE_URL=postgresql+psycopg2://<username>:<password>@<host>:<port>/<database>
+   SECRET_KEY=<your-secret-key>
+   ALGORITHM=HS256
+   ACCESS_TOKEN_EXPIRE_MINUTES=30
+   PROJECT_NAME=Library Management API
+   VERSION=1.0.0
+   ```
 
-## Test the App
+---
 
-http://127.0.0.1:8000/docs
+## Running the Application
 
+1. Start the FastAPI server:
+
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+
+2. Access the API documentation:
+
+   - Swagger UI: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+   - ReDoc: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
+
+---
+
+## Database Setup
+
+Ensure your PostgreSQL database is running and the `DATABASE_URL` in the `.env` file is correctly configured. The database tables will be created automatically on application startup.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
