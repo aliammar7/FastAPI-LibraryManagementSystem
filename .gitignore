@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+
+# Environment variables
+.env
+.env.*
+
+# Alembic
+alembic/versions/
+
+# OS
+.DS_Store
+
+# VS Code
+.vscode/
